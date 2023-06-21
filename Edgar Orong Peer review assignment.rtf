@@ -1,0 +1,700 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2707
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red251\green0\blue7;\red0\green0\blue255;\red255\green255\blue254;
+\red196\green0\blue198;\red81\green96\blue112;\red38\green38\blue38;\red255\green255\blue255;\red227\green0\blue6;
+\red19\green118\blue70;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c12195\c0;\cssrgb\c0\c0\c100000;\cssrgb\c100000\c100000\c99608;
+\cssrgb\c81961\c0\c81961;\cssrgb\c38824\c45490\c51373;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;\cssrgb\c92157\c0\c0;
+\cssrgb\c3529\c52549\c34510;}
+\margl1440\margr1440\vieww28600\viewh14740\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+cData Scientist Role Play: Profiling and Analyzing the Yelp Dataset Coursera Worksheet\
+\
+This is a 2-part assignment. In the first part, you are asked a series of questions that will help you profile and understand the data just like a data scientist would. For this first part of the assignment, you will be assessed both on the correctness of your findings, as well as the code you used to arrive at your answer. You will be graded on how easy your code is to read, so remember to use proper formatting and comments where necessary.\
+\
+In the second part of the assignment, you are asked to come up with your own inferences and analysis of the data for a particular research question you want to answer. You will be required to prepare the dataset for the analysis you choose to do. As with the first part, you will be graded, in part, on how easy your code is to read, so use proper formatting and comments to illustrate and communicate your intent as required.\
+\
+For both parts of this assignment, use this "worksheet." It provides all the questions you are being asked, and your job will be to transfer your answers and SQL coding where indicated into this worksheet so that your peers can review your work. You should be able to use any Text Editor (Windows Notepad, Apple TextEdit, Notepad ++, Sublime Text, etc.) to copy and paste your answers. If you are going to use Word or some other page layout application, just be careful to make sure your answers and code are lined appropriately.\
+In this case, you may want to save as a PDF to ensure your formatting remains intact for you reviewer.\
+\
+\
+\
+Part 1: Yelp Dataset Profiling and Understanding\
+\
+1. Profile the data by finding the total number of records for each of the tables below:\
+	\
+i. Attribute table = \cf2 10000\cf0 \
+ii. Business table = \cf2 10000\cf0 \
+iii. Category table = \cf2 10000\cf0 \
+iv. Checkin table = \cf2 10000\cf0 \
+v. elite_years table = \cf2 10000\cf0 \
+vi. friend table = \cf2 10000\cf0 \
+vii. hours table = \cf2 10000\cf0 \
+viii. photo table = \cf2 10000\cf0 \
+ix. review table = \cf2 10000\cf0 \
+x. tip table = \cf2 10000\cf0 \
+xi. user table = \cf2 10000\cf0 \
+	\
+\
+\
+2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.\
+\
+i. Business =
+\f1\fs24  \cf2 10000
+\f0\fs26 \cf0 \
+ii. Hours =
+\f1\fs24  
+\f0\fs26 \cf2 1562\cf0 \
+iii. Category = \cf2 2643\cf0 \
+iv. Attribute = \cf2 1115\cf0 \
+v. Review = \cf2 10000(id)\cf0 , \cf2 8090 (business_id)\cf0 , \cf2 9581(user_id)\cf0 \
+vi. Checkin = \cf2 493 \cf0 \
+vii. Photo = \cf2 10000(id)\cf0 , \cf2 6493(business_id)\cf0 \
+viii. Tip = \cf2 537(user_id)\cf0 , \cf2 3979(business_id)\cf0 \
+ix. User = \cf2 10000\cf0 \
+x. Friend = \cf2 11\cf0 \
+xi. Elite_years = \cf2 2780\cf0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  id) \cf3 FROM\cf0  BUSINESS
+\f0\fs26 \cb1 \
+\
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf3 FROM\cf0  \cf3 hours \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf3 FROM\cf0  category \cf3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf3 FROM\cf0  attribute \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  id) \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  \cf5 user_id\cf0 ) \cf3 FROM\cf0  review\cf3  \cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id ) \cf3 FROM\cf0  checkin\cf3  \cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  id) \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf3 FROM\cf0  photo\cf3  \cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  \cf5 user_id\cf0 ) \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  business_id) \cf3 FROM\cf0  tip \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  id ) \cf3 FROM\cf0  \cf3 user\cf0  \cf3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  \cf5 user_id\cf0 ) \cf3 FROM\cf0  friend\cf3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf3 DISTINCT\cf0  \cf5 user_id\cf0 ) \cf3 FROM\cf0  elite_years \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\
+\
+Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.	\
+\
+\
+\
+3. Are there any columns with null values in the Users table? Indicate "yes," or "no."\
+\
+	\cf2 Answer: No\cf0 \
+	\
+	\
+	SQL code used to arrive at answer:\
+	\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf6 *\cf0  \cb1 \
+\cf3 \cb4 FROM\cf0  \cf3 user\cf0 \cb1 \
+\cf3 \cb4 WHERE\cf0  id \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     \cf3 name\cf0  \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     review_count \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     yelping_since \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     useful \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     funny \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     cool \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     fans \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     average_stars \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_hot \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_more \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_profile \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_cute \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_list \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_note \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_plain \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_cool \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_funny \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_writer \cf6 is\cf0  \cf6 NULL\cf0  \cf6 OR\cf0 \cb1 \
+\cb4     compliment_photos \cf6 is\cf0  \cf6 NULL\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb4 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \cb1 \
+	\
+\
+	\
+4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:\
+\
+	i. Table: Review, Column: Stars\
+	\
+		min:	\cf2 1\cf0 	max:	\cf2 5\cf0 	avg: \cf2 3.7082\cf0 \
+\
+		
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 MIN\cf0 (Stars),\cf5 MAX\cf0  (Stars),\cb1  \cf5 \cb4 AVG\cf0  (Stars)\cb1 \
+
+\f0\fs26 		
+\f1\fs24 \cf3 \cb4 FROM\cf0  Review\cb1 \
+
+\f0\fs26 \
+		\
+	\
+	ii. Table: Business, Column: Stars\
+	\
+		min:
+\f1\fs24  \cf2 1.0
+\f0\fs26 	\cf0 	max:	\cf2 5.0\cf0 	avg: \cf2 3.6549\cf0 \
+		\
+		
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 MIN\cf0 (Stars), \cf5 MAX\cf0 (Stars), \cf5 AVG\cf0 (Stars)\cb1 \
+
+\f0\fs26 		
+\f1\fs24 \cf3 \cb4 FROM\cf0  Business\cb1 \
+
+\f0\fs26 \
+	\
+	iii. Table: Tip, Column: Likes\
+	\
+		min:	\cf2 0\cf0 	max:	\cf2 2\cf0 	avg: \cf2 0.0144\cf0 \
+		\
+		
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 MIN\cf0  (Likes), \cf5 MAX\cf0  (Likes), \cf5 AVG\cf0 (Likes)\cb1 \
+
+\f0\fs26 		
+\f1\fs24 \cf3 \cb4 FROM\cf0  Tip\cb1 \
+
+\f0\fs26 \
+\
+	iv. Table: Checkin, Column: Count\
+	\
+		min:	\cf2 1\cf0 	max:	\cf2 53\cf0 	avg: \cf2 1.9414\cf0 \
+\
+		
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 MIN\cf0 (\cf5 Count\cf0 ), \cf5 MAX\cf0 (\cf5 Count\cf0 ), \cf5 AVG\cf0 (\cf5 Count\cf0 )\cb1 \
+
+\f0\fs26 		
+\f1\fs24 \cf3 \cb4 FROM\cf0  Checkin\cb1 \
+
+\f0\fs26 \
+		\
+		\
+	\
+	v. Table: User, Column: Review_count\
+	\
+		min:	\cf2 0\cf0 	max:	\cf2 2000\cf0 	avg: \cf2 24.2995\cf0 \
+\
+		
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 MIN\cf0 (review_count), \cf5 MAX\cf0 (review_count), \cf5 AVG\cf0 (review_count)\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 		FROM\cf0  \cf3 user\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+		\
+\
+5. List the cities with the most reviews in descending order:\
+\
+	SQL code used to arrive at answer:\
+	\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cb1 \
+\cb4 city, \cb1 \
+\cf5 \cb4 SUM\cf0 (review_count) \cf3 AS\cf0  number_reviews\cb1 \
+\cf3 \cb4 FROM\cf0  business\cb1 \
+\cf3 \cb4 GROUP\cf0  \cf3 BY\cf0  city\cb1 \
+\cf3 \cb4 ORDER\cf0  \cf3 BY\cf0  number_reviews \cf3 DESC\cf0 \cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+	\
+	Copy and Paste the Result Below:\
+	\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +-----------------+----------------+\
+| city            | number_reviews |\
++-----------------+----------------+\
+| Las Vegas       |          82854 |\
+| Phoenix         |          34503 |\
+| Toronto         |          24113 |\
+| Scottsdale      |          20614 |\
+| Charlotte       |          12523 |\
+| Henderson       |          10871 |\
+| Tempe           |          10504 |\
+| Pittsburgh      |           9798 |\
+| Montr\'e9al        |           9448 |\
+| Chandler        |           8112 |\
+| Mesa            |           6875 |\
+| Gilbert         |           6380 |\
+| Cleveland       |           5593 |\
+| Madison         |           5265 |\
+| Glendale        |           4406 |\
+| Mississauga     |           3814 |\
+| Edinburgh       |           2792 |\
+| Peoria          |           2624 |\
+| North Las Vegas |           2438 |\
+| Markham         |           2352 |\
+| Champaign       |           2029 |\
+| Stuttgart       |           1849 |\
+| Surprise        |           1520 |\
+| Lakewood        |           1465 |\
+| Goodyear        |           1155 |\
++-----------------+----------------+\
+(Output limit exceeded, 25 of 362 total rows shown)\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \cb1 \
+	\
+6. Find the distribution of star ratings to the business in the following cities:\
+\
+i. Avon\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +-------+-------+\
+| stars | count |\
++-------+-------+\
+|   1.5 |    10 |\
+|   2.5 |     6 |\
+|   3.5 |    88 |\
+|   4.0 |    21 |\
+|   4.5 |    31 |\
+|   5.0 |     3 |\
++-------+-------+
+\f0\fs26 \cf0 \cb1 \
+\
+\
+SQL code used to arrive at answer:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  stars, \cf5 SUM\cf0 (review_count) \cf3 AS\cf0  \cf5 count\cf0 \cb1 \
+\cf3 \cb4 FROM\cf0  business\cb1 \
+\cf3 \cb4 WHERE\cf0  city \cf6 =\cf0  \cf9 'Avon'\cf0 \cb1 \
+\cf3 \cb4 GROUP\cf0  \cf3 BY\cf0  stars\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\
+\
+ii. Beachwood\
+\
+SQL code used to arrive at answer:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  stars, \cf5 SUM\cf0 (review_count) \cf3 AS\cf0  \cf5 count\cf0 \cb1 \
+\cf3 \cb4 FROM\cf0  business\cb1 \
+\cf3 \cb4 WHERE\cf0  city \cf6 =\cf0  \cf9 'Beachwood'\cf0 \cb1 \
+\cf3 \cb4 GROUP\cf0  \cf3 BY\cf0  stars\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\
+\
+Copy and Paste the Resulting Table Below (2 columns \'e2\'80\'93 star rating and count):\
+		\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +-------+-------+\
+| stars | count |\
++-------+-------+\
+|   2.0 |     8 |\
+|   2.5 |     3 |\
+|   3.0 |    11 |\
+|   3.5 |     6 |\
+|   4.0 |    69 |\
+|   4.5 |    17 |\
+|   5.0 |    23 |\
++-------+-------+
+\f0\fs26 \cf0 \cb1 \
+\
+\
+7. Find the top 3 users based on their total number of reviews:\
+		\
+	SQL code used to arrive at answer:\
+	
+\f2\fs28 \cf7 \cb8 \
+	
+\f1\fs24 \cf3 \cb4 SELECT\cf0  id, \cf3 name\cf0 , review_count\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 	
+\f1\fs24 \cf3 \cb4 FROM\cf0  \cf3 user\cf0 \cb1 \
+
+\f0\fs26 	
+\f1\fs24 \cf3 \cb4 ORDER\cf0  \cf3 BY\cf0  review_count \cf3 DESC\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 	LIMIT\cf0  \cf10 3\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+		\
+	Copy and Paste the Result Below:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------------------+--------+--------------+\
+| id                     | name   | review_count |\
++------------------------+--------+--------------+\
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |\
+| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |\
+| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |\
++------------------------+--------+--------------+
+\f0\fs26 \cf0 \cb1 \
+		\
+\
+\
+8. Does posing more reviews correlate with more fans?\
+Please explain your findings and interpretation of the results:\
+	\
+\pard\pardeftab720\partightenfactor0
+\cf2 Answer: No, posing more reviews does not correlate with more fans as can be seen in the table below. Take for example user Mimi with only 968 review count and 497 fans and compare it to user Gerald with 2000 review count and only 253 fans.\cf0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------------------+-----------+--------------+------+\
+| id                     | name      | review_count | fans |\
++------------------------+-----------+--------------+------+\
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |         2000 |  253 |\
+| -3s52C4zL_DHRK0ULG6qtg | Sara      |         1629 |   50 |\
+| -8lbUNlXVSoXqaRRiHiSNg | Yuri      |         1339 |   76 |\
+| -K2Tcgh2EKX6e6HqqIrBIQ | .Hon      |         1246 |  101 |\
+| -FZBTkAZEXoP7CYvRV2ZwQ | William   |         1215 |  126 |\
+| --2vR0DIsmQ6WfcSzKWigw | Harald    |         1153 |  311 |\
+| -gokwePdbXjfS0iF7NsUGA | eric      |         1116 |   16 |\
+| -DFCC64NXgqrxlO8aLU5rg | Roanna    |         1039 |  104 |\
+| -8EnCioUmDygAbsYZmTeRQ | Mimi      |          968 |  497 |\
+| -0IiMAZI2SsQ7VmyzJjokQ | Christine |          930 |  173 |\
+| -fUARDNuXAfrOn4WLSZLgA | Ed        |          904 |   38 |\
+| -hKniZN2OdshWLHYuj21jQ | Nicole    |          864 |   43 |\
+| -9da1xk7zgnnfO1uTVYGkA | Fran      |          862 |  124 |\
+| -B-QEUESGWHPE_889WJaeg | Mark      |          861 |  115 |\
+| -kLVfaJytOJY2-QdQoCcNQ | Christina |          842 |   85 |\
+| -kO6984fXByyZm3_6z2JYg | Dominic   |          836 |   37 |\
+| -lh59ko3dxChBSZ9U7LfUw | Lissa     |          834 |  120 |\
+| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |          813 |  159 |\
+| -l9giG8TSDBG1jnUBUXp5w | Alison    |          775 |   61 |\
+| -dw8f7FLaUmWR7bfJ_Yf0w | Sui       |          754 |   78 |\
+| -AaBjWJYiQxXkCMDlXfPGw | Tim       |          702 |   35 |\
+| -jt1ACMiZljnBFvS6RRvnA | L         |          696 |   10 |\
+| -IgKkE8JvYNWeGu8ze4P8Q | Angela    |          694 |  101 |\
+| -hxUwfo3cMnLTv-CAaP69A | Crissy    |          676 |   25 |\
+| -H6cTbVxeIRYR-atxdielQ | Lyn       |          675 |   45 |\
++------------------------+-----------+--------------+------+\
+(Output limit exceeded, 25 of 10000 total rows shown)
+\f0\fs26 \cf0 \cb1 \
+\
+Code used: \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  id, \cf3 name\cf0 , review_count, fans\cb1 \
+\cf3 \cb4 FROM\cf0  \cf3 user\cf0 \cb1 \
+\cf3 \cb4 ORDER\cf0  \cf3 BY\cf0  review_count \cf3 DESC\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+	\
+\
+	\
+9. Are there more reviews with the word "love" or with the word "hate" in them?\
+\
+	\cf2 Answer: Yes, there are more reviews with love (1780) than hate (232)\cf0 \
+\
+	\
+	SQL code used to arrive at answer:\
+\
+CODE FOR LOVE:\
+\
+	
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf6 *\cf0 ) \cf3 AS\cf0  love_count\cb1 \
+
+\f0\fs26 	
+\f1\fs24 \cf3 \cb4 FROM\cf0  review\cb1 \
+
+\f0\fs26 	
+\f1\fs24 \cf3 \cb4 WHERE\cf0  \cf3 text\cf0  \cf6 LIKE\cf0  \cf9 '%love%'\cf0 \cb1 \
+
+\f0\fs26 \
+RESULT:\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------+\
+| love_count |\
++------------+\
+|       1780 |\
++------------+
+\f0\fs26 \cf0 \cb1 \
+
+\f2\fs28 \cf7 \cb8 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \cb1 CODE FOR HATE:\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0 (\cf6 *\cf0 ) \cf3 AS\cf0  hate_count\cb1 \
+\cf3 \cb4 FROM\cf0  review\cb1 \
+\cf3 \cb4 WHERE\cf0  \cf3 text\cf0  \cf6 LIKE\cf0  \cf9 '%hate%'\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+RESULT:\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------+\
+| hate_count |\
++------------+\
+|        232 |\
++------------+
+\f0\fs26 \cf0 \cb1 \
+\
+	\
+	\
+10. Find the top 10 users with the most fans:\
+\
+	SQL code used to arrive at answer:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  id, \cf3 name\cf0 , fans\cb1 \
+\cf3 \cb4 FROM\cf0  \cf3 user\cf0 \cb1 \
+\cf3 \cb4 ORDER\cf0  \cf3 BY\cf0  fans \cf3 DESC\cf0 \cb1 \
+\cf3 \cb4 LIMIT\cf0  \cf10 10\cf0 ;\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+	\
+	Copy and Paste the Result Below:
+\f2\fs28 \cf7 \cb8 \
+
+\f0\fs26 \cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------------------+-----------+------+\
+| id                     | name      | fans |\
++------------------------+-----------+------+\
+| -9I98YbNQnLdAmcYfb324Q | Amy       |  503 |\
+| -8EnCioUmDygAbsYZmTeRQ | Mimi      |  497 |\
+| --2vR0DIsmQ6WfcSzKWigw | Harald    |  311 |\
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |  253 |\
+| -0IiMAZI2SsQ7VmyzJjokQ | Christine |  173 |\
+| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |  159 |\
+| -9bbDysuiWeo2VShFJJtcw | Cat       |  133 |\
+| -FZBTkAZEXoP7CYvRV2ZwQ | William   |  126 |\
+| -9da1xk7zgnnfO1uTVYGkA | Fran      |  124 |\
+| -lh59ko3dxChBSZ9U7LfUw | Lissa     |  120 |\
++------------------------+-----------+------+
+\f0\fs26 \cf0 \cb1 \
+\
+	\
+		\
+\
+Part 2: Inferences and Analysis\
+\
+1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.\
+	\
+i. Do the two groups you chose to analyze have a different distribution of hours? \
+\pard\pardeftab720\partightenfactor0
+\cf2 Answer: Yes, they have different distribution hours. \cf0 \
+\
+\
+ii. Do the two groups you chose to analyze have a different number of reviews?\
+\cf2 Answer: Yes, they have different number of reviews.\cf0 \
+         \
+iii. Are you able to infer anything from the location data provided between these two groups? Explain.\
+\
+ \cf2 Answer No, they came from different zip codes.\cf0 \
+\
+\
+SQL code used for analysis:
+\f1\fs24 \cf3 \cb4 \
+\
+SELECT\cf0  
+\f2\fs28 \cf7 \cb8 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf0 \cb4 B.\cf3 name\cf0 , \cb1 \
+\cb4 C.category, \cb1 \
+\cb4 B.city, \cb1 \
+\cb4 B.postal_code \cf3 as\cf0  zipcode,\cb1 \
+\cf3 \cb4 hours\cf0 ,  \cb1 \
+\cf3 \cb4 CASE\cf0 \cb1 \
+\cb4     \cf3 WHEN\cf0  stars \cf6 BETWEEN\cf0  \cf10 2\cf0  \cf6 AND\cf0  \cf10 3\cf0  \cf3 THEN\cf0  \cf9 '2-3 stars'\cf0 \cb1 \
+\cb4     \cf3 WHEN\cf0  stars \cf6 BETWEEN\cf0  \cf10 4\cf0  \cf6 AND\cf0  \cf10 5\cf0  \cf3 THEN\cf0  \cf9 '4-5 stars'\cf0 \cb1 \
+\cb4     \cf3 END\cf0  \cf3 AS\cf0  rating, 
+\f2\fs28 \cf7 \cb8 \
+
+\f1\fs24 \cf0 \cb4 B.review_count \cf3 as\cf0  reviews\cb1 \
+\cf3 \cb4 FROM\cf0  business B\cb1 \
+\cb4         \cf6 Inner\cf0  \cf6 join\cf0  \cf3 hours\cf0  H  \cf3 on\cf0  B.id \cf6 =\cf0  H.business_id\cb1 \
+\cb4         \cf6 Inner\cf0  \cf6 join\cf0  category C \cf3 on\cf0  C.business_id \cf6 =\cf0  B.id\cb1 \
+\cf3 \cb4 WHERE\cf0  city \cf6 =\cf0  \cf9 'Toronto'\cf0  \cf6 and\cf0  category \cf6 =\cf0  \cf9 'Food'\cf0  \cf6 and\cf0  rating \cf6 in\cf0  (\cf9 '2-3 stars'\cf0 ,\cf9 '4-5 stars'\cf0 )\cb1 \
+\cf3 \cb4 GROUP\cf0  \cf3 BY\cf0  \cf3 name\cf0 \cb1 \
+\cf3 \cb4 ORDER\cf0  \cf3 By\cf0  stars \cf3 desc\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +--------------+----------+---------+---------+----------------------+-----------+---------+\
+| name         | category | city    | zipcode | hours                | rating    | reviews |\
++--------------+----------+---------+---------+----------------------+-----------+---------+\
+| Cabin Fever  | Food     | Toronto | M6P 1A6 | Saturday|16:00-2:00  | 4-5 stars |      26 |\
+| Halo Brewery | Food     | Toronto | M6H 1V5 | Saturday|11:00-21:00 | 4-5 stars |      15 |\
+| Loblaws      | Food     | Toronto | M6R 1X3 | Saturday|8:00-22:00  | 2-3 stars |      10 |\
++--------------+----------+---------+---------+----------------------+-----------+---------+
+\f1\fs24 \cf3 \cb4 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \cb1 \
+\
+\
+\
+		\
+		\
+2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.\
+		\
+i. Difference 1: \
+\pard\pardeftab720\partightenfactor0
+\cf2 Answer: he average review count was 9 points more for business that are open than the business that are closed.\cf0 \
+         \
+         \
+ii. Difference 2: \
+\cf2 Answer: The number of distinct business_id for the business that are open is 5 times more than the business that are closed. Hence the average review count of of the business that are open is higher compared to the ones that are closed.\cf0 \
+         \
+         \
+         \
+SQL code used for analysis:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  \cf5 COUNT\cf0  (\cf3 DISTINCT\cf0  id), \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb4         \cf5 COUNT\cf0  (\cf3 DISTINCT\cf0  city),\cb1 \
+\cb4         \cf5 AVG\cf0  (stars), \cb1 \
+\cb4         \cf5 AVG\cf0  (review_count),\cb1 \
+\cb4         is_open\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 From\cf0  business\cb1 \
+\cf3 \cb4 Group\cf0  \cf3 By\cf0  is_open\
+\
+\
+
+\f2\fs28 \cf7 \cb8 +---------------------+-----------------------+---------------+--------------------+---------+\
+| COUNT (DISTINCT id) | COUNT (DISTINCT city) |   AVG (stars) | AVG (review_count) | is_open |\
++---------------------+-----------------------+---------------+--------------------+---------+\
+|                1520 |                   144 | 3.52039473684 |      23.1980263158 |       0 |\
+|                8480 |                   351 | 3.67900943396 |      31.7570754717 |       1 |\
++---------------------+-----------------------+---------------+--------------------+---------+
+\f1\fs24 \cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\
+	\
+	\
+3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.\
+\
+Ideas for analysis include: Parsing out keywords and business attributes for sentiment analysis, clustering businesses to find commonalities or anomalies between them, predicting the overall star rating for a business, predicting the number of fans a user will have, and so on. These are just a few examples to get you started, so feel free to be creative and come up with your own problem you want to solve. Provide answers, in-line, to all of the following:\
+	\
+i. Indicate the type of analysis you chose to do:\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 Answer: I want to know if having free wifi can somehow affect the star rating or review count that restaurants get in the state of \'91ON\'92.\cf0 \
+         \
+         \
+ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:\
+                           \
+\cf2 Answer: I will be pulling data from 3 tables for this analysis - business, category and attribute. The data I\'92m gonna need are the following: business name, their category, the state, the attributes they have, their star ratings and review count. Each data type has been carefully selected based on my needs for this analysis.\cf0 \
+\
+                  \
+iii. Output of your finished dataset:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf7 \cb8 +------------------------------+-----------+-------+-------+-------+--------------+\
+| business                     | attribute | value | state | stars | review_count |\
++------------------------------+-----------+-------+-------+-------+--------------+\
+| Sushi Osaka                  | WiFi      | free  | ON    |   4.5 |            8 |\
+| Hermanos Mexican Grill       | WiFi      | no    | ON    |   4.0 |           69 |\
+| Masamune Japanese Restaurant | WiFi      | no    | ON    |   4.0 |           61 |\
+| Edulis                       | WiFi      | no    | ON    |   4.0 |           89 |\
+| Flaming Kitchen              | WiFi      | no    | ON    |   3.0 |           25 |\
+| Big Smoke Burger             | WiFi      | free  | ON    |   3.0 |           47 |\
+| Pizzaiolo                    | WiFi      | no    | ON    |   3.0 |           34 |\
+| P & J Hamburgers Inn         | WiFi      | free  | ON    |   3.0 |            3 |\
+| 99 Cent Sushi                | WiFi      | free  | ON    |   2.0 |            5 |\
++------------------------------+-----------+-------+-------+-------+--------------+
+\f0\fs26 \cf0 \cb1 \
+\
+\
+\
+         \
+iv. Provide the SQL code you used to create your final dataset:\
+\
+
+\f1\fs24 \cf3 \cb4 SELECT\cf0  b.\cf3 name\cf0  \cf3 AS\cf0  business, \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb4         a.\cf3 name\cf0  \cf3 AS\cf0  attribute,\cb1 \
+\cb4         a.\cf3 value\cf0 ,\cb1 \
+\cb4         b.\cf3 state\cf0 , \cb1 \
+\cb4         b.stars,\cb1 \
+\cb4         b.review_count\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 FROM\cf0  business b \cf6 INNER\cf0  \cf6 JOIN\cf0  category c \cf3 on\cf0  c.business_id \cf6 =\cf0  b.id\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb4                 \cf6 INNER\cf0  \cf6 JOIN\cf0  attribute a \cf3 on\cf0  a.business_id \cf6 =\cf0  b.id\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 WHERE\cf0  a.\cf3 name\cf0  \cf6 like\cf0  \cf9 'wifi'\cf0  \cf6 AND\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb4         category \cf6 =\cf0  \cf9 'Restaurants'\cf0  \cf6 and\cf0  b.\cf3 state\cf0  \cf6 =\cf9 'ON'\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 ORDER\cf0  \cf3 BY\cf0   stars \cf3 DESC\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs24 \cf0 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \
+\
+\
+\
+\
+\
+}
