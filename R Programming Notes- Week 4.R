@@ -1,5 +1,4 @@
-# R Programming Notes: Week 4
-
+# IBM: R for Data Analysis (3)
 
 
 # READING CSV FILES FILES
