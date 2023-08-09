@@ -1,0 +1,209 @@
+---
+title: "Webscraping in R"
+author: "Edgar Orong"
+date: "2023-05-11"
+output: html_document
+---
+
+## Webscraping in R
+
+
+### The `revest` library
+
+**The rvest package is a popular web scraping package for R. After rvest reads an HTML page, you can use the tag names to find the child nodes of the current node.**
+```{r}
+library(rvest)
+```
+
+
+**We also need to import httr library to get some HTML pages by sending HTTP GET request**
+```{r}
+library(httr)
+```
+
+
+First let's warm-up by reading HTML from the following character variable simple_html_text
+
+**A simple HTML document in a character variable**
+```{r}
+simple_html_text <- "
+<html>
+    <body>
+        <p>This is a test html page</p>
+    </body>
+</html>"
+```
+
+
+Then use the read_html function to create the HTML root node, i.e., the html node by loading the simple_html_text
+
+**Create the root html node by reading the simple HTML string**
+```{r}
+root_node <- read_html(simple_html_text)
+root_node
+```
+
+
+**You can also check the type of root_node**
+```{r}
+class(root_node)
+```
+
+
+You can see the class is xml_node because rvest load HTML pages and convert them using XML format internally. XML has similar parent-child tree structure but more suitable for storing and tranporting data than HTML.
+
+**Next, let's try to create a HTML node by loading a remote HTML page given a URL**
+```{r}
+ibm_html_node <- read_html("http://www.ibm.com")
+ibm_html_node
+```
+
+
+Sometimes you want to download some HTML pages and analyze them offline, you could use download.file to do so:
+
+**download the R home page and save it to an HTML file locally called r.html**
+```{r}
+download.file('https://www.r-project.org', destfile = 'r.html')
+```
+
+
+**Create a html_node from the local r.html file**
+```{r}
+html_node <- read_html('r.html')
+html_node
+
+```
+
+
+Now you know how to read an HTML page from a character variable, a URL, or a local HTML file. 
+
+**Next let's see how to parse and extract data from a specific node(s) starting from the root node**
+
+```{r}
+simple_html_text <- "
+<html>
+    <body>
+        <p style=\"color:red;\">This is a test html page</p>
+    </body>
+</html>"
+
+root_node <- read_html(simple_html_text)
+root_node
+```
+
+
+Get the <body> node by using its parent node <html>
+
+**Get the child <body> node from <html> root_node**
+```{r}
+body_node <- html_node(root_node, "body")
+body_node
+#You can see it has a child node paragraph <p>
+# Let's get the content of the <p>
+# Get the child <p> node from its <body> node
+p_node <- html_node(body_node, "p")
+p_content<-html_text(p_node)
+p_content
+#The <p> node also has style attribute with value color:red;, which means we want the browser to render its text using red color. To get an attribute of a node, we can use a function called html_attr("attribute name")
+# Use the p_node as the first argument to get its attribute
+style_attr <- html_attr(p_node, "style")
+style_attr
+```
+
+
+In the code cell below, the downloaded r.html file (from https://www.r-project.org) has an <img> node representing an image URL to R logo image (a relative path on its web server), let's try to find the image URL and download it.
+
+
+You need to paste the relative path in <img> with the the https://www.r-project.org to get the full URL of the image, and use the GET function to request the image as bytes in the response
+
+**Write your code below. Don't forget to press Shift+Enter to execute the cell**
+```{r}
+url <- 'https://www.r-project.org'
+html_node <- read_html('r.html')
+```
+
+
+**Get the image node using its root node**
+```{r}
+img_node <- html_node(html_node, "img")
+# Get the "src" attribute of img node, representing the image location
+img_relative_path <- html_attr(img_node, "src")
+img_relative_path
+```
+
+
+**Paste img_relative_path with 'https://www.r-project.org'**
+```{r}
+image_path <- paste(url, img_relative_path, sep="")
+```
+
+**Use GET request to get the image**
+```{r}
+image_response<-GET(image_path)
+```
+
+
+Then use writeBin() function to save the returned bytes into an image file.
+
+**Parse the body from the response as bytes**
+```{r}
+image <- content(image_response, "raw")
+```
+
+**Write the bytes to a png file**
+```{r}
+writeBin(image, "r.png")
+```
+
+Now, from the file list on the left, you should be able to find a saved r.png file.
+
+
+In HTML, many tabluar data are stored in <table> nodes. Thus, it is very important to be able to extract data from <table> nodes and preferably convert them into R data frames.
+
+
+Below is a sample HTML page contains a color table showing the supported HTML colors, and we want to load it as a R data frame so we can analyze it using data frame-related operations.
+
+```{r}
+table_url <- "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DA0321EN-SkillsNetwork/labs/datasets/HTMLColorCodes.html"
+
+```
+
+**Like other HTML nodes, let's first get the <table> node using html_node function**
+```{r}
+root_node <-read_html(table_url)
+table_node <- html_node(root_node, "table")
+table_node
+```
+
+
+You can see the table node in a messy HTML format. Fortunately, you dont need to parse it by yourself, rvest provides a handy function called html_table() to convert <table> node into R dataframe
+
+**Extract content from table_node and convert the data into a dataframe**
+```{r}
+color_data_frame <- html_table(table_node)
+head(color_data_frame)
+```
+
+
+**But you could see the table headers were parsed as the first row, no worries, we could manually fix that**
+```{r}
+names(color_data_frame)
+```
+
+
+**Convert the first row as column names**
+```{r}
+names(color_data_frame) <- as.matrix(color_data_frame[1, ])
+```
+
+**Then remove the first row**
+```{r}
+data_frame <- color_data_frame[-1, ]
+```
+
+```{r}
+head(data_frame)
+names(color_data_frame)
+```
+
+That's it for webscraping in R, there is a lot more you can do check out rvest.
