@@ -19,3 +19,16 @@ Welcome to my Data Analytics Learning Notes repository! Here you will find a col
 
 • [Interview Cases and Questions](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/SLQ%20Practice%20-%20INTERVIEW%20CASES%20and%20QUESTIONS.sql)
 
+
+### R
+• [IBM: R for Data Analysis (1)](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/IBM-%20R%20for%20Data%20Analysis%20(1).Rmd)
+
+• [IBM: R for Data Analysis (2)](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/IBM-%20R%20for%20Data%20Analysis%20(2).Rmd)
+
+• [Google: Data Visualization in R](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/Data%20Visualization%20in%20R.Rmd)
+
+• [IBM: Webscraping in R](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/Webscraping%20in%20R.Rmd)
+
+• [IBM: Importing Data in R](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/Importing%20Data%20in%20R.Rmd)
+
+• [IBM: HTTP Request and REST API](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/HTTP%20Request%20and%20REST%20API.Rmd)
