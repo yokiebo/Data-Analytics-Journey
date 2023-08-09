@@ -25,6 +25,8 @@ Welcome to my Data Analytics Learning Notes repository! Here you will find a col
 
 • [IBM: R for Data Analysis (2)](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/IBM-%20R%20for%20Data%20Analysis%20(2).Rmd)
 
+• [IBM: R for Data Analysis (3)](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/IBM-%20R%20for%20Data%20Analysis%20(3).R)
+
 • [Google: Data Visualization in R](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/Data%20Visualization%20in%20R.Rmd)
 
 • [IBM: Webscraping in R](https://github.com/yokiebo/Data-Analytics-Journey/blob/main/Webscraping%20in%20R.Rmd)
